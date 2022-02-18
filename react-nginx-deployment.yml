@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-nginx
+  labels:
+    app: react-nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react-nginx
+  template:
+    metadata:
+      labels:
+        app: react-nginx
+    spec:
+      containers:
+        - name: react-nginx
+          image: logicalogbonna/react-nginx:0.0.1
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 200m
+              memory: 512Mi
