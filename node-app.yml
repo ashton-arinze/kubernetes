@@ -1,0 +1,60 @@
+# ------------ DEPLOYMENT ------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app
+  labels:
+    app: node-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-app-container
+        image: logicalogbonna/node-app:0.0.1
+        ports:
+          - containerPort: 5551
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+---
+# ------------ SERVICE ------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app-service
+  labels:
+    app: node-app-service
+spec:
+  selector:
+    app: node-app
+  ports:
+  - port: 80
+    targetPort: 5551
+    protocol: TCP
+  type: ClusterIP
+
+---
+# ------------ HPA ------------
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: node-app-hpa
+  labels:
+    app: hpa-auto-scaler
+    name: node-app-auto-scaler
+spec:
+  maxReplicas: 3
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: node-app
+  targetCPUUtilizationPercentage: 60

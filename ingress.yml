@@ -11,10 +11,14 @@ spec:
         backend:
           serviceName: react-nginx-service
           servicePort: 80
-  # - host: v2.example.com
-  #   http:
-  #     paths:
-  #     - path: "/"
-  #       backend:
-  #         serviceName: nginx-v2
-  #         servicePort: 80
+      - path: "/rita"
+        backend:
+          serviceName: node-app-service
+          servicePort: 80
+  - host: rita.ashton.tk
+    http:
+      paths:
+      - path: "/"
+        backend:
+          serviceName: node-app-service
+          servicePort: 80
