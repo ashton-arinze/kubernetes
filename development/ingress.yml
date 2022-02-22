@@ -2,7 +2,16 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: react-nginx-ingress
+  annotations:
+    # kubernetes.io/ingress.class: "react-nginx-ingress"
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+    acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
+  tls:
+    - hosts:
+        - ashton.tk
+        - rita.ashton.tk
+      secretName: lets-encrypt-cert-tls
   rules:
   - host: ashton.tk
     http:
