@@ -10,8 +10,7 @@ spec:
   - host: ashton.tk
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/"
         backend:
           service:
             name: sample-fullstack-app-service
@@ -20,8 +19,7 @@ spec:
   - host: cd.ashton.tk
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/"
         backend:
           service:
             name: argocd-server
