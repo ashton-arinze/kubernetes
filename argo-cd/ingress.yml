@@ -17,3 +17,13 @@ spec:
             name: sample-fullstack-app-service
             port: 
               number: 80
+  - host: cd.ashton.tk
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: argocd-server
+            port: 
+              number: 80
