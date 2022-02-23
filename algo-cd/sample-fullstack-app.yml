@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-fullstack-app
+  namespace: pet-project
 spec:
   selector:
     matchLabels:
@@ -15,11 +16,11 @@ spec:
       - name: sample-fullstack-app
         image: logicalogbonna/node-sample-application:main
         env:
-          - name: MONGO_DB
+          - name: MONGO_URI
             valueFrom:
               configMapKeyRef:
                 name: sample-fullstack-config-map
-                key: mongo_db
+                key: mongo_uri
         resources:
           limits:
             memory: "128Mi"
@@ -42,6 +43,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: sample-fullstack-app-hpa
+  namespace: pet-project
   labels:
     app: hpa-auto-scaler
     name: sample-fullstack-app-auto-scaler
