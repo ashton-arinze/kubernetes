@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/ashton-arinze/kubernetes.git
     targetRevision: HEAD
-    path: algo-cd
+    path: argo-cd
   destination: 
     server: https://kubernetes.default.svc
     namespace: pet-project

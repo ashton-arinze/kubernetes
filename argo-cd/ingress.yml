@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sample-fullstack-ingress
+  namespace: pet-project
   labels:
     name: sample-fullstack-ingress
 spec:
