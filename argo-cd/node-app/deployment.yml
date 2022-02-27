@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-fullstack-app
+  namespace: pet-project
+spec:
+  selector:
+    matchLabels:
+      app: sample-fullstack-app
+  template:
+    metadata:
+      labels:
+        app: sample-fullstack-app
+    spec:
+      containers:
+        - name: sample-fullstack-app
+          image: logicalogbonna/node-sample-application:main
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: sample-fullstack-config-map
+                  key: mongo_uri
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5551
+

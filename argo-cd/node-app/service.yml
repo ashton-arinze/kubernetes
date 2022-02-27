@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-fullstack-app-service
+spec:
+  selector:
+    app: sample-fullstack-app
+  ports:
+    - port: 80
+      targetPort: 5551

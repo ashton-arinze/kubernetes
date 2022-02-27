@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sample-fullstack-app-hpa
+  namespace: pet-project
+  labels:
+    app: hpa-auto-scaler
+    name: sample-fullstack-app-auto-scaler
+spec:
+  maxReplicas: 3
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: sample-fullstack-app
+  targetCPUUtilizationPercentage: 60
