@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sample-fullstack-app
-          image: logicalogbonna/node-sample-application:main
+          image: logicalogbonna/node-sample-application:fc2426f0129885e0c65c71098dd7e52a1800200e
           env:
             - name: MONGO_URI
               valueFrom:
@@ -27,4 +27,3 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 5551
-
