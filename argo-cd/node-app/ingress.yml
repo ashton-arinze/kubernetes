@@ -1,28 +1,44 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: sample-fullstack-ingress
-  namespace: pet-project
-  labels:
-    name: sample-fullstack-ingress
+  name: react-nginx-ingress
+  annotations:
+    # kubernetes.io/ingress.class: "react-nginx-ingress"
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer"
+    acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
+  tls:
+    - hosts:
+        - ashton.tk
+      secretName: lets-encrypt-cert-tls
   rules:
   - host: ashton.tk
     http:
       paths:
-      - pathType: Prefix
-        path: "/"
+      - path: "/"
         backend:
-          service:
-            name: sample-fullstack-app-service
-            port: 
-              number: 80
-  # - host: cd.ashton.tk
-  #   http:
-  #     paths:
-  #     - path: "/"
-  #       backend:
-  #         service:
-  #           name: argocd-server
-  #           port: 
-  #             number: 80
+          serviceName: sample-fullstack-app-service
+          servicePort: 80
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: sample-fullstack-ingress
+#   namespace: pet-project
+#   labels:
+#     name: sample-fullstack-ingress
+# spec:
+#   rules:
+#   - host: ashton.tk
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: "/"
+#         backend:
+#           service:
+#             name: sample-fullstack-app-service
+#             port: 
+#               number: 80
