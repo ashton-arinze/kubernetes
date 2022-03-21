@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sample-fullstack-app
-          image: logicalogbonna/node-sample-application:ca979b95eee349c8efdb7686bf0e90dd55348192
+          image: logicalogbonna/node-sample-application:cc29b1c937d46f0ac99ea6a0f6da43becc288f8c
           env:
             - name: MONGO_URI
               valueFrom:
